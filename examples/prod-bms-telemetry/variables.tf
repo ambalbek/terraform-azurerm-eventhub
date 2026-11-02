@@ -25,17 +25,6 @@ variable "capacity" {
   default     = 1
 }
 
-variable "log_analytics_workspace_name" {
-  description = "Name of the Log Analytics workspace."
-  type        = string
-}
-
-variable "log_analytics_retention_days" {
-  description = "Retention in days for Log Analytics workspace."
-  type        = number
-  default     = 30
-}
-
 variable "tags" {
   description = "Tags to apply to all resources."
   type        = map(string)
