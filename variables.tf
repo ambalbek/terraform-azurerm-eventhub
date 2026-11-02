@@ -113,8 +113,9 @@ variable "private_endpoint_subnet_id" {
 }
 
 variable "log_analytics_workspace_id" {
-  description = "Log Analytics workspace ID for diagnostic settings."
+  description = "Log Analytics workspace ID for diagnostic settings. Set to null to skip."
   type        = string
+  default     = null
 }
 
 variable "tags" {

@@ -140,6 +140,8 @@ resource "azurerm_private_endpoint" "this" {
 # Diagnostic Settings
 # --------------------------------------------------------------------------
 resource "azurerm_monitor_diagnostic_setting" "this" {
+  count = var.log_analytics_workspace_id != null ? 1 : 0
+
   name                       = "${var.namespace_name}-diag"
   target_resource_id         = azurerm_eventhub_namespace.this.id
   log_analytics_workspace_id = var.log_analytics_workspace_id

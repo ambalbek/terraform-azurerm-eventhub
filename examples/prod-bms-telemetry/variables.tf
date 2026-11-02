@@ -1,16 +1,13 @@
-variable "resource_group_name" {
-  description = "Name of the resource group."
+variable "environment" {
+  description = "Environment name (e.g. dev, prod)."
   type        = string
+  default     = "prod"
 }
 
 variable "location" {
   description = "Azure region."
   type        = string
-}
-
-variable "namespace_name" {
-  description = "Name of the Event Hub namespace."
-  type        = string
+  default     = "canadacentral"
 }
 
 variable "namespace_sku" {
