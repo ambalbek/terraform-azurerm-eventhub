@@ -26,14 +26,14 @@ resource "azurerm_resource_group" "this" {
 module "eventhub" {
   source = "../../"
 
-  name                = local.namespace_name
+  namespace_name      = local.namespace_name
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
-  sku                 = var.namespace_sku
+  namespace_sku       = var.namespace_sku
   capacity            = var.capacity
   tags                = var.tags
 }
 
 output "namespace_id" {
-  value = module.eventhub.resource_id
+  value = module.eventhub.namespace_id
 }
