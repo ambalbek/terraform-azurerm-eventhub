@@ -24,18 +24,17 @@ resource "azurerm_resource_group" "this" {
 }
 
 module "eventhub" {
-  source  = "Azure/avm-res-eventhub-namespace/azurerm"
-  version = "0.1.1"
+  source  = "app.terraform.io/vantagedc/eventhub/azurerm"
+  version = "~> 1.0"
 
-  name                          = local.namespace_name
-  resource_group_name           = azurerm_resource_group.this.name
-  location                      = azurerm_resource_group.this.location
-  sku                           = var.namespace_sku
-  capacity                      = var.capacity
-  public_network_access_enabled = true
-  tags                          = var.tags
+  namespace_name      = local.namespace_name
+  resource_group_name = azurerm_resource_group.this.name
+  location            = azurerm_resource_group.this.location
+  namespace_sku       = var.namespace_sku
+  capacity            = var.capacity
+  tags                = var.tags
 }
 
 output "namespace_id" {
-  value = module.eventhub.resource_id
+  value = module.eventhub.namespace_id
 }

@@ -14,7 +14,7 @@ variable "location" {
 }
 
 variable "namespace_sku" {
-  description = "SKU for the Event Hub namespace."
+  description = "SKU for the Event Hub namespace (Standard or Premium)."
   type        = string
   default     = "Standard"
 
@@ -56,66 +56,6 @@ variable "public_network_access_enabled" {
   description = "Allow public network access to the namespace."
   type        = bool
   default     = false
-}
-
-variable "network_rulesets" {
-  description = "Network rule set configuration."
-  type = object({
-    default_action                 = optional(string, "Deny")
-    trusted_service_access_enabled = optional(bool, true)
-    ip_rules = optional(list(object({
-      ip_mask = string
-      action  = optional(string, "Allow")
-    })), [])
-    virtual_network_rules = optional(list(object({
-      subnet_id = string
-    })), [])
-  })
-  default = {
-    default_action                 = "Deny"
-    trusted_service_access_enabled = true
-    ip_rules                       = []
-    virtual_network_rules          = []
-  }
-}
-
-variable "hubs" {
-  description = "Map of Event Hubs to create within the namespace."
-  type = map(object({
-    partition_count   = number
-    message_retention = number
-    consumer_groups = optional(map(object({
-      user_metadata = optional(string, "")
-    })), {})
-    authorization_rules = optional(map(object({
-      listen = optional(bool, false)
-      send   = optional(bool, false)
-      manage = optional(bool, false)
-    })), {})
-  }))
-  default = {}
-}
-
-variable "namespace_authorization_rules" {
-  description = "Map of namespace-level authorization rules."
-  type = map(object({
-    listen = optional(bool, false)
-    send   = optional(bool, false)
-    manage = optional(bool, false)
-  }))
-  default = {}
-}
-
-variable "private_endpoint_subnet_id" {
-  description = "Subnet ID for the private endpoint. Set to null to skip PE creation."
-  type        = string
-  default     = null
-}
-
-variable "log_analytics_workspace_id" {
-  description = "Log Analytics workspace ID for diagnostic settings. Set to null to skip."
-  type        = string
-  default     = null
 }
 
 variable "tags" {
