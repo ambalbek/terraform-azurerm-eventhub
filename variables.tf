@@ -58,6 +58,18 @@ variable "public_network_access_enabled" {
   default     = false
 }
 
+variable "hubs" {
+  description = "Map of Event Hubs to create within the namespace."
+  type = map(object({
+    partition_count   = number
+    message_retention = number
+    consumer_groups = optional(map(object({
+      user_metadata = optional(string, "")
+    })), {})
+  }))
+  default = {}
+}
+
 variable "tags" {
   description = "Tags to apply."
   type        = map(string)
